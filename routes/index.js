@@ -27,6 +27,7 @@ var app = require('../app.js');
 
   //post handler for submiting form+++++++++++
   router.post('/', function(request, response) {
+    var userInput = document.body.url;
     var collection = db.collection('urls');
     collection.insert({/*info you generate*/}, function(err, docs) {
       response.redirect('/info/' + shortUrl);
