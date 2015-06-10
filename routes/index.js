@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var app = require('../app.js');
+
 // var MongoClient = require('mongodb').MongoClient;
 // var url = 'mongodb://127.0.0.1:27017/test';
  
@@ -16,37 +17,44 @@ var app = require('../app.js');
 // });
 
 
-
-//homepage handler++++++++++++++++++++
-router.get('/', function(request, response) {
-  response.render('index', {});
-  // index.jade needs a form to submit a URL for shortening
-});
-
-//post handler for submiting form+++++++++++
-router.post('/', function(request, response) {
-  var collection = db.collection('urls');
-  collection.insert({/*info you generate*/}, function(err, docs) {
-    response.redirect('/info/' + shortUrl);
+  
+  //homepage handler++++++++++++++++++++
+  router.get('/', function(request, response) {
+    response.render('index', {});
+    // index.jade needs a form to submit a URL for shortening
   });
-});
 
-//Get handler+++++++++++++++++++++
-router.get('/info/:shortUrl', function(request, response) {
-  var collection = db.collection('urls'),
-      shortUrl = request.params.shortUrl;
-  collection.find().toArray({'shortened': shortUrl}, function(err, url) {
-    response.render('info', {url: url});
-  });
-});
 
-//get handler for shotening url+++++++
-router.get('/:shortUrl', function(request, response) {
-  var collection = db.collection('urls'),
-      shortUrl = request.params.shortUrl;
-  collection.find({'shortened': shortUrl}, function(err, url) {
-    response.redirect(url.target);
+  //post handler for submiting form+++++++++++
+  router.post('/', function(request, response) {
+    var collection = db.collection('urls');
+    collection.insert({/*info you generate*/}, function(err, docs) {
+      response.redirect('/info/' + shortUrl);
+    });
   });
+
+  //Get handler+++++++++++++++++++++
+  router.get('/info/:shortUrl', function(request, response) {
+    var collection = db.collection('urls'),
+        shortUrl = request.params.shortUrl;
+    collection.find().toArray({'shortened': shortUrl}, function(err, url) {
+      response.render('info', {url: url});
+    });
+  });
+
+  //get handler for shotening url+++++++
+  router.get('/:shortUrl', function(request, response) {
+    var collection = db.collection('urls'),
+        shortUrl = request.params.shortUrl;
+    collection.find({'shortened': shortUrl}, function(err, url) {
+      response.redirect(url.target);
+    });
+  });
+<<<<<<< HEAD
 });
 
 module.exports = router;
+=======
+
+  module.exports = router;
+>>>>>>> 990d2f38efdd075bbbd5d8a54410a48c2cf19026
