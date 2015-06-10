@@ -50,11 +50,7 @@ var app = require('../app.js');
       response.redirect(url.target);
     });
   });
-<<<<<<< HEAD
-});
+
 
 module.exports = router;
-=======
 
-  module.exports = router;
->>>>>>> 990d2f38efdd075bbbd5d8a54410a48c2cf19026
