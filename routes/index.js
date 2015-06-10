@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var app = require('../app.js');
+var uuid = require('node-uuid');
+
 
 // var MongoClient = require('mongodb').MongoClient;
 // var url = 'mongodb://127.0.0.1:27017/test';
@@ -27,6 +29,7 @@ var app = require('../app.js');
 
   //post handler for submiting form+++++++++++
   router.post('/', function(request, response) {
+    var id = uuid.v4();
     var userInput = document.body.url;
     var collection = db.collection('urls');
     collection.insert({/*info you generate*/}, function(err, docs) {
@@ -51,9 +54,33 @@ var app = require('../app.js');
       response.redirect(url.target);
     });
   });
+/***********************************
+*/
 
+
+{
+  "_id": id,
+  "shortened": "click here for you link",
+  "target": userInput,
+  "clicks": 8,
+  "last_click": "2015-01-13T16:42:00"
+}
+
+
+/*
+************************************/
 
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
 
 
