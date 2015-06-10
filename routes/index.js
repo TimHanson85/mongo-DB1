@@ -1,18 +1,21 @@
 var express = require('express');
 var router = express.Router();
-var MongoClient = require('mongodb').MongoClient;
+var app = require('../app.js');
+// var MongoClient = require('mongodb').MongoClient;
+// var url = 'mongodb://127.0.0.1:27017/test';
+ 
 
-MongoClient.connect('mongodb://127.0.0.1:27017/test', function(err, db) {
-  if (err) {
-    throw err;
-  }
-
+// MongoClient.connect(url, function(err, db){
+//  if (err) throw err;
+//  app.set('mongo', db); 
+//  console.log("Connected to mongo");
+// });
 /* GET home page. */
 // router.get('/', function(req, res, next) {
 //   res.render('index', { title: 'Express' });
 // });
 
-module.exports = router;
+
 
 //homepage handler++++++++++++++++++++
 router.get('/', function(request, response) {
@@ -45,4 +48,5 @@ router.get('/:shortUrl', function(request, response) {
     response.redirect(url.target);
   });
 });
-});
+
+module.exports = router;
