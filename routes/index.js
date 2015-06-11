@@ -7,6 +7,8 @@ var uuid = require('node-uuid');
   //homepage handler++++++++++++++++++++
   router.get('/', function(request, response) {
     var db = app.get('mongo'); 
+    var currentDate = new Date();
+    console.log(currentDate);
     response.render('index', {});
     // index.jade needs a form to submit a URL for shortening
   });
@@ -21,7 +23,10 @@ var uuid = require('node-uuid');
     
     collection.insert({
       'shortened': shortUrl,
-      'target': userInput}, function(err, docs) {
+      'target': userInput,
+      'clicks': 0,
+      'last_click_time': ""},
+       function(err, docs) {
     response.redirect('/info/' + shortUrl);
     });
   });
@@ -39,12 +44,18 @@ var uuid = require('node-uuid');
   //get handler for shotening url+++++++
   router.get('/:shortUrl', function(request, response) {
     var db = app.get('mongo'); 
+
+    var currentDate = new Date();
+    // var dateTime = "Posted at: " + currentDate.getDate() + "/" + (currentDate.getMonth()+1)  + "/" + currentDate.getFullYear() + " @ " + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+
     var collection = db.collection('urls'),
         shortUrl = request.params.shortUrl;
     collection.find({'shortened': shortUrl}, function(err, url) {
       response.redirect(url.target);
     });
   });
+
+
   /***********************************
   */
 
