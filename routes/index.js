@@ -46,7 +46,7 @@ var uuid = require('node-uuid');
     var db = app.get('mongo'); 
 
     var currentDate = new Date();
-    // var dateTime = "Posted at: " + currentDate.getDate() + "/" + (currentDate.getMonth()+1)  + "/" + currentDate.getFullYear() + " @ " + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+    var dateTime = "Posted at: " + currentDate.getDate() + "/" + (currentDate.getMonth()+1)  + "/" + currentDate.getFullYear() + " @ " + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
 
     var collection = db.collection('urls'),
         shortUrl = request.params.shortUrl;
