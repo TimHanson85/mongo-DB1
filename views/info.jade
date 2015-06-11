@@ -5,6 +5,7 @@ block content
   if error
     h3= error
   p here is your shortened URL 
-        a(href=url.target)=url.shortened
-        p your link has been clicked url.clicks times
+        a(href='/redirect/'+url.shortened)=url.shortened
+        p=url.clicks 
+        p=url.last_click_time
        
