@@ -40,18 +40,7 @@ var uuid = require('node-uuid');
   });
 
   //get handler for shotening url+++++++
-<<<<<<< HEAD
-  router.get('/:shortUrl', function(request, response) {
-    var db = app.get('mongo'); 
 
-    var currentDate = new Date();
-    var dateTime = "Posted at: " + currentDate.getDate() + "/" + (currentDate.getMonth()+1)  + "/" + currentDate.getFullYear() + " @ " + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
-
-    var collection = db.collection('urls'),
-        shortUrl = request.params.shortUrl;
-    collection.find({'shortened': shortUrl}, function(err, url) {
-      response.redirect(url.target);
-=======
   router.get('/redirect/:shortUrl', function(request, response) {
     var db = app.get('mongo');
     var collection = db.collection('urls');
@@ -67,7 +56,7 @@ var uuid = require('node-uuid');
         {$inc: {clicks: 1}, $set: {last_click_time: dateTime}}
       );
       response.redirect('http://'+url[0].target);
->>>>>>> master
+
     });
   });
 
