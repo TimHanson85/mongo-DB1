@@ -7,8 +7,6 @@ var uuid = require('node-uuid');
   //homepage handler++++++++++++++++++++
   router.get('/', function(request, response) {
     var db = app.get('mongo'); 
-    var currentDate = new Date();
-    console.log(currentDate);
     response.render('index', {});
     // index.jade needs a form to submit a URL for shortening
   });
@@ -42,6 +40,7 @@ var uuid = require('node-uuid');
   });
 
   //get handler for shotening url+++++++
+<<<<<<< HEAD
   router.get('/:shortUrl', function(request, response) {
     var db = app.get('mongo'); 
 
@@ -52,6 +51,23 @@ var uuid = require('node-uuid');
         shortUrl = request.params.shortUrl;
     collection.find({'shortened': shortUrl}, function(err, url) {
       response.redirect(url.target);
+=======
+  router.get('/redirect/:shortUrl', function(request, response) {
+    var db = app.get('mongo');
+    var collection = db.collection('urls');
+    var shortUrl = request.params.shortUrl;
+    
+    var currentDate = new Date(); 
+    var dateTime = "Clicked at: " + currentDate.getDate() + "/" + (currentDate.getMonth()+1)  + "/" + currentDate.getFullYear() + " @ " + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+    
+    collection.find({'shortened': shortUrl}).toArray(function(err, url) {
+      console.log(url);
+      collection.update(
+        {'shortened': shortUrl},
+        {$inc: {clicks: 1}, $set: {last_click_time: dateTime}}
+      );
+      response.redirect('http://'+url[0].target);
+>>>>>>> master
     });
   });
 
